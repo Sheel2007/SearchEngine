@@ -42,10 +42,21 @@
 </nav>
 <div class="search">
   <h4>Search Engine</h4>
-  <input type="text" placeholder="Search...">
-  <br>
-  <a href="dictionary.html" class="btn">Dictionary</a>
-  <a href="scholar.html" class="btn">Scholar</a>
+  <input id="search"type="text" placeholder="Search..."><br>
+  <a href="#" class="btn" onclick="dict()">Dictionary</a>
+  <a href="#" class="btn">Scholar</a>
+</div>
+
+<script>
+  function dict(){
+    var x = document.getElementById("search").value;
+    const url = "https://www.dictionary.com/browse/";
+    var url1 = url + x;
+    var win = window.open(url1, '_self');
+    win.focus;
+  }
+</script>
+
 </body>
 
 </html>
