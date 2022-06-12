@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>LAUGH</title>
+
+    <script>
+        function drawFace(angle) {
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+            const radius = canvas.height / 2; // radius of the face
+            const radians = angle * Math.PI / 180; // the angle parameter in radians
+            const startAngle = (Math.PI - radians) / 2; // start angle of the mouth arc
+            const endAngle = (Math.PI + radians) / 2; // end angle of the mouth arc
+            const 𝝧 = radians/2; // for additional calculations
+            const mouthRadius = 100/Math.cos(𝝧);
+            const apothem = Math.tan(𝝧) * 100; // can be used to calculate the y offset
+            const y = 200 - apothem; // y-coordnate of center of the circle
+            const x = 150; // x-coordinate of center
+
+            ctx.clearRect(0,0,300,300);
+            ctx.beginPath();
+            //head
+            ctx.arc(150, 150, radius, 0, Math.PI * 2);
+            //eyes
+            ctx.moveTo(100, 100);
+            ctx.arc(100, 100, 10, 0, Math.PI * 2);
+            ctx.moveTo(200, 100);
+            ctx.arc(200, 100, 10, 0, Math.PI * 2);
+            ctx.stroke();
+            //mouth
+            // ctx.moveTo(50, 200);
+            ctx.moveTo(250, 200);
+            // ctx.lineTo(250, 200);
+            ctx.arc(x, y, mouthRadius, startAngle, endAngle);
+            ctx.stroke();
+        }
+        let interval;
+        let i = 80;
+        function start() {
+            interval = setInterval(function() {
+                drawFace(i);
+                i++;
+                if (i > 100) {
+                    clearInterval(interval);
+                    end();
+                }
+            }, 50);
+        }
+
+        function end() {
+            interval = setInterval(function() {
+                drawFace(i);
+                i--;
+                if(i < 80) {
+                    clearInterval(interval);
+                    start();
+                }
+            }, 50);
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <h1>This is a Heading</h1>
+    <p>This is a paragraph.</p>
+    <canvas id="canvas" height="300" width="300"></canvas>
+    <button onclick="start()">Draw</button>
+</body>
+
+</html>
